@@ -27,7 +27,7 @@ public class PreferencesManager {
     }
 
     public boolean alertEnabled() {
-        return sharedPreferences.getBoolean(ALERT_ENABLED, false);
+        return sharedPreferences.getBoolean(ALERT_ENABLED, true);
     }
 
     public int launchCounter() {
@@ -50,7 +50,7 @@ public class PreferencesManager {
 
     public void disableAlert() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(ALERT_ENABLED, true);
+        editor.putBoolean(ALERT_ENABLED, false);
         editor.commit();
     }
 
