@@ -1,0 +1,7 @@
+<resources>
+    <string name="rate">Vota:</string>
+    <string name="rate_message">Vuoi votare questa applicazione sul Play Store?</string>
+    <string name="rate_button">Sì</string>
+    <string name="later_button">Più tardi</string>
+    <string name="never_button">No, grazie</string>
+</resources>

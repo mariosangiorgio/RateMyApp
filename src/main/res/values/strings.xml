@@ -1,0 +1,7 @@
+<resources>
+    <string name="rate">Rate:</string>
+    <string name="rate_message">Would you like to rate this app on the Play Store?</string>
+    <string name="rate_button">Yes</string>
+    <string name="later_button">Later</string>
+    <string name="never_button">No, thanks</string>
+</resources>
