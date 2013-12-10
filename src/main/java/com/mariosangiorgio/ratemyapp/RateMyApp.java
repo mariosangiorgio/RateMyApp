@@ -46,7 +46,7 @@ public class RateMyApp {
         DialogListener listener = new DialogListener();
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-        dialogBuilder.setTitle(context.getString(R.string.rate)+" "+context.getString(R.string.app_name));
+        dialogBuilder.setTitle(context.getString(R.string.rate)+" "+context.getApplicationInfo().name);
         dialogBuilder.setMessage(R.string.rate_message);
         dialogBuilder.setPositiveButton(R.string.rate_button, listener);
         dialogBuilder.setNeutralButton(R.string.later_button, listener);
