@@ -12,7 +12,7 @@ You can embed RateMyApp in your application in the following way:
 
         int numberOfLaunchesUntilRequest = 3;
         int numberOfDaysUntilRequest = 7;
-        RateMyApp rateMyApp = new RateMyApp( getApplicationContext(), numberOfLaunchesUntilRequest , numberOfDaysUntilRequest );
+        RateMyApp rateMyApp = new RateMyApp( this, numberOfLaunchesUntilRequest , numberOfDaysUntilRequest );
         rateMyApp.appLaunched();
 
 RateMyApp currently supports the following languages:
