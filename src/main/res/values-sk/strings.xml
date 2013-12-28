@@ -1,0 +1,7 @@
+<resources>
+    <string name="rate">Ohodnotiť:</string>
+    <string name="rate_message">Chcete ohodnotiť túto aplikáciu v Obchode Play?</string>
+    <string name="rate_button">Áno</string>
+    <string name="later_button">Neskôr</string>
+    <string name="never_button">Nie, vďaka</string>
+</resources>
