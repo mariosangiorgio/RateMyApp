@@ -1,0 +1,7 @@
+﻿<resources>
+    <string name="rate">評分:</string>
+    <string name="rate_message">你想要在Play商店上為這app評分嗎?</string>
+    <string name="rate_button">好</string>
+    <string name="later_button">稍後</string>
+    <string name="never_button">不了，謝謝</string>
+</resources>
