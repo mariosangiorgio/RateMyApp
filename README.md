@@ -3,6 +3,8 @@ RateMyApp
 
 An Android module to kindly ask users to rate your application.
 
+![alt tag](https://raw.github.com/mariosangiorgio/RateMyApp/master/media/screenshot.png)
+
 You can embed RateMyApp in your application in the following way:
 
  * include the RateMyApp module. In Android Studio you simply need to go in the main project directory and type `git clone https://github.com/mariosangiorgio/RateMyApp.git`
