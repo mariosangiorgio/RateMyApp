@@ -12,9 +12,12 @@ You can embed RateMyApp in your application in the following way:
  * add it to the dependency in your main module `build.gradle` by adding `compile project(':RateMyApp')`
  * add the following code at the end of your main activity `onCreate` method:
 
-        int numberOfLaunchesUntilRequest = 3;
-        int numberOfDaysUntilRequest = 7;
-        RateMyApp rateMyApp = new RateMyApp( this, numberOfLaunchesUntilRequest , numberOfDaysUntilRequest );
+        RateMyAppBuilder builder = new RateMyAppBuilder();
+        builder.setLaunchesBeforeAlert(3); // Optional
+        builder.setDaysBeforeAlert(7);     // Optional
+        builder.setNotificationManager(notificationManager);
+        //Optional if you want to show the alert in a custom way
+        RateMyApp rateMyApp = builder.build(this);
         rateMyApp.appLaunched();
 
 RateMyApp currently supports the following languages:
