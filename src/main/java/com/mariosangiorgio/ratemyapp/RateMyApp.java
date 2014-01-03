@@ -42,11 +42,15 @@ public class RateMyApp {
                 preferencesManager.daysFromFirstLaunch() >= daysUntilPrompt;
     }
 
-    private void showDialog() {
+    private String getApplicationName(Context context){
+        return context.getApplicationContext().getApplicationInfo().loadLabel(context.getPackageManager()).toString();
+    }
+
+    public void showDialog() {
         DialogListener listener = new DialogListener();
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-        dialogBuilder.setTitle(context.getString(R.string.rate)+" "+context.getApplicationInfo().name);
+        dialogBuilder.setTitle(context.getString(R.string.rate)+" "+getApplicationName(context));
         dialogBuilder.setMessage(R.string.rate_message);
         dialogBuilder.setPositiveButton(R.string.rate_button, listener);
         dialogBuilder.setNeutralButton(R.string.later_button, listener);
