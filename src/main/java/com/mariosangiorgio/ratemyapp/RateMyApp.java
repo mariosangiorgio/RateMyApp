@@ -22,8 +22,12 @@ public class RateMyApp implements  NotificationManager{
             throw new IllegalArgumentException("Expected non-negative values");
         }
         this.context = context;
-        this.notificationManager = notificationManager;
-        // If notificationManager is null the class is going to call itself
+        if(notificationManager == null){
+            this.notificationManager = this;
+        }
+        else{
+            this.notificationManager = notificationManager;
+        }
         this.daysUntilPrompt = daysUntilPrompt;
         this.launchesUntilPrompt = launchesUntilPrompt;
         this.preferencesManager = PreferencesManager.buildFromContext(context);
@@ -32,12 +36,7 @@ public class RateMyApp implements  NotificationManager{
     public void appLaunched(){
         if(preferencesManager.alertEnabled()){
             if(canShowDialog()){
-                if(notificationManager == null){
-                    showDialog();
-                }
-                else{
-                    notificationManager.showDialog();
-                }
+                notificationManager.showDialog();
             }
             else{
                 preferencesManager.incrementLaunchCounter();

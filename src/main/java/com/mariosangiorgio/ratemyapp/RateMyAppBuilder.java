@@ -9,7 +9,7 @@ public class RateMyAppBuilder {
 
     public RateMyAppBuilder setNotificationManager(NotificationManager notificationManager){
         if(notificationManager == null){
-            throw new NullPointerException("Not-null NotificationManager expected");
+            throw new IllegalArgumentException("Not-null NotificationManager expected");
         }
         this.notificationManager = notificationManager;
         return this;

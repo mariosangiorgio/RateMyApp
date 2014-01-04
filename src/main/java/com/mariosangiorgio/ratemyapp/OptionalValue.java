@@ -8,6 +8,9 @@ public class OptionalValue<T> {
     }
 
     public OptionalValue(T value){
+        if(value == null){
+            throw new IllegalArgumentException("Expected a non-null value");
+        }
         this.value = value;
     }
 
