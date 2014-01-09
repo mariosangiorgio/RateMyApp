@@ -27,4 +27,4 @@ RateMyApp currently supports the following languages:
  * German (thanks to bigjan)
  * Slovak (thanks to pylerSM)
  * Traditional Chinese (Taiwan) (thanks to Aerotinge)
- 
+ * Portuguese (thanks to RaphaDroid)
