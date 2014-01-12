@@ -1,3 +1,10 @@
+['android-library', 'signing', 'maven'].each {
+    apply plugin: it
+}
+
+group = 'com.mariosangiorgio'
+version = '1.0'
+
 task wrapper(type: Wrapper) {
     gradleVersion = '1.9'
 }
@@ -9,11 +16,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:0.7.+'
     }
-}
-apply plugin: 'android-library'
-
-repositories {
-    mavenCentral()
 }
 
 android {
@@ -31,6 +33,62 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     compile 'com.android.support:appcompat-v7:+'
+}
+
+configurations {
+    archives {
+        extendsFrom configurations.default
+    }
+}
+
+signing {
+    required { has("release") && gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
+
+uploadArchives {
+    configuration = configurations.archives
+    repositories.mavenDeployer {
+        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+        repository(url: sonatypeRepo) {
+            authentication(userName: sonatypeUsername,
+                    password: sonatypePassword)
+        }
+
+        pom.project {
+            name 'RateMyApp Android Library'
+            packaging 'aar'
+            description 'An Android module to kindly ask users to rate your application.'
+            url 'https://github.com/mariosangiorgio/RateMyApp'
+
+            scm {
+                url 'scm:git@github.com:mariosangiorgio/RateMyApp'
+                connection 'scm:git@github.com:mariosangiorgio/RateMyApp.git'
+                developerConnection 'scm:git@github.com:mariosangiorgio/RateMyApp.git'
+            }
+
+            licenses {
+                license {
+                    name 'The MIT License (MIT)'
+                    url 'https://github.com/mariosangiorgio/RateMyApp/blob/master/LICENSE'
+                    distribution 'repo'
+                }
+            }
+
+            developers {
+                developer {
+                    id 'mariosangiorgio'
+                    name 'Mario Sangiorgio'
+                    email 'mariosangiorgio@gmail.com'
+                }
+            }
+        }
+    }
 }
