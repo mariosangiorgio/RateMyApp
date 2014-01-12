@@ -3,6 +3,8 @@ RateMyApp
 
 An Android module to kindly ask users to rate your application.
 
+[![Build Status](https://travis-ci.org/mariosangiorgio/RateMyApp.png?branch=master)](https://travis-ci.org/mariosangiorgio/RateMyApp)
+
 ![alt tag](https://raw.github.com/mariosangiorgio/RateMyApp/master/media/screenshot.png)
 
 You can embed RateMyApp in your application in the following way:
