@@ -3,7 +3,7 @@ RateMyApp
 
 An Android module to kindly ask users to rate your application.
 
-[![Build Status](https://travis-ci.org/mariosangiorgio/RateMyApp.png?branch=master)](https://travis-ci.org/mariosangiorgio/RateMyApp)
+[![Build Status](https://travis-ci.org/mariosangiorgio/RateMyApp.png?branch=master)](https://travis-ci.org/mariosangiorgio/RateMyApp) the latest library build is available [here](https://dl.dropboxusercontent.com/u/673233/RateMyApp.aar)
 
 ![alt tag](https://raw.github.com/mariosangiorgio/RateMyApp/master/media/screenshot.png)
 
