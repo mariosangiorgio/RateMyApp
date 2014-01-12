@@ -3,16 +3,17 @@ RateMyApp
 
 An Android module to kindly ask users to rate your application.
 
-[![Build Status](https://travis-ci.org/mariosangiorgio/RateMyApp.png?branch=master)](https://travis-ci.org/mariosangiorgio/RateMyApp) the latest library build is available [here](https://dl.dropboxusercontent.com/u/673233/RateMyApp.aar)
+[![Build Status](https://travis-ci.org/mariosangiorgio/RateMyApp.png?branch=master)](https://travis-ci.org/mariosangiorgio/RateMyApp)
 
 ![alt tag](https://raw.github.com/mariosangiorgio/RateMyApp/master/media/screenshot.png)
 
-You can embed RateMyApp in your application in the following way:
+You can embed RateMyApp in your application either by downloading and including the library or (better) by declearing it as a dependency.
 
- * include the RateMyApp module. In Android Studio you simply need to go in the main project directory and type `git clone https://github.com/mariosangiorgio/RateMyApp.git`
- * add it to the included modules list in `settings.gradle`, which should look like this `include ':RateMyApp',':FutsalCoach'`
- * add it to the dependency in your main module `build.gradle` by adding `compile project(':RateMyApp')`
- * add the following code at the end of your main activity `onCreate` method:
+        dependencies {
+            compile 'com.mariosangiorgio.RateMyApp:1.0'
+        }
+    
+Then add the following code at the end of your main activity `onCreate` method:
 
         RateMyAppBuilder builder = new RateMyAppBuilder();
         builder.setLaunchesBeforeAlert(3); // Optional
