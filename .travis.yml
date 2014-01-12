@@ -25,4 +25,4 @@ before_install:
 install:
   - true
 script:
-  - TERM=dumb ./gradlew bundleRelease
+  - TERM=dumb ./gradlew bundleRelease -Psigning.password=SECRET -PsonatypePassword=SECRET
