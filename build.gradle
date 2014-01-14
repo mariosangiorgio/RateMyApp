@@ -41,12 +41,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:+'
 }
 
-configurations {
-    archives {
-        extendsFrom configurations.default
-    }
-}
-
 signing {
     required { has("release") && gradle.taskGraph.hasTask("uploadArchives") }
     sign configurations.archives
