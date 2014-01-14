@@ -31,3 +31,5 @@ RateMyApp currently supports the following languages:
  * Slovak (thanks to pylerSM)
  * Traditional Chinese (Taiwan) (thanks to Aerotinge)
  * Portuguese (thanks to RaphaDroid)
+
+Please note that if you want to compile the library by yourself you need to provide values for the `signing.password` and for `sonatypePassword` variables. You can either add them (with fake values, the real ones are needed only if you want to publish the library to maven central) to `gradle.properties` or pass them from the command line (by adding `-Psigning.password=SECRET -PsonatypePassword=SECRET` to the gradle invocation).
