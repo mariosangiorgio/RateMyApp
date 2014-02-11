@@ -36,7 +36,7 @@ public class RateMyApp implements  NotificationManager{
     public void appLaunched(){
         if(preferencesManager.alertEnabled()){
             if(canShowDialog()){
-                notificationManager.showDialog();
+                notificationManager.showDialog(1);
             }
             else{
                 preferencesManager.incrementLaunchCounter();
@@ -70,15 +70,30 @@ public class RateMyApp implements  NotificationManager{
         return context.getApplicationContext().getApplicationInfo().loadLabel(context.getPackageManager()).toString();
     }
 
-    public void showDialog() {
-        DialogListener listener = new DialogListener();
+    public void showDialog(int flowPosition) {
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-        dialogBuilder.setTitle(context.getString(R.string.rate)+" "+getApplicationName(context));
-        dialogBuilder.setMessage(R.string.rate_message);
-        dialogBuilder.setPositiveButton(R.string.rate_button, listener);
-        dialogBuilder.setNeutralButton(R.string.later_button, listener);
-        dialogBuilder.setNegativeButton(R.string.never_button, listener);
+        AlertDialog.Builder dialogBuilder =  new AlertDialog.Builder(context);
+        dialogBuilder.setTitle(context.getString(R.string.rate) + " " + getApplicationName(context));
+
+
+
+        switch(flowPosition){
+            case 1:
+                DialogListener listener = new DialogListener();
+                dialogBuilder.setNeutralButton(R.string.later_button, listener);
+                dialogBuilder.setPositiveButton(R.string.rate_button, listener);
+                dialogBuilder.setNegativeButton(R.string.never_button, listener);
+                dialogBuilder.setMessage(R.string.rate_message);
+                break;
+            case 2:
+                DialogListenerStarNumber listenerStarNumber = new DialogListenerStarNumber();
+                dialogBuilder.setPositiveButton(R.string.value_store, listenerStarNumber);
+                dialogBuilder.setNegativeButton(R.string.value_email, listenerStarNumber);
+                dialogBuilder.setMessage(R.string.rate_score);
+                break;
+        }
+
+
         dialogBuilder.show();
     }
 
@@ -88,8 +103,9 @@ public class RateMyApp implements  NotificationManager{
         public void onClick(DialogInterface dialogInterface, int buttonPressed) {
             switch(buttonPressed){
                 case DialogInterface.BUTTON_POSITIVE:
-                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + context.getPackageName())));
-                    preferencesManager.disableAlert();
+
+
+                    showDialog(2);
                     break;
                 case DialogInterface.BUTTON_NEUTRAL:
                     preferencesManager.resetFirstLaunchTimestamp();
@@ -99,6 +115,48 @@ public class RateMyApp implements  NotificationManager{
                     break;
             }
             dialogInterface.dismiss();
+        }
+    }
+
+    private class DialogListenerStarNumber implements DialogInterface.OnClickListener{
+
+        @Override
+        public void onClick(DialogInterface dialogInterface, int buttonPressed) {
+            switch(buttonPressed){
+                case DialogInterface.BUTTON_POSITIVE:
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id" + context.getPackageName())));
+                    preferencesManager.disableAlert();
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    DialogListenerSendEmail listenerEmail = new DialogListenerSendEmail();
+                    AlertDialog.Builder dialogBuilder =  new AlertDialog.Builder(context);
+                    dialogBuilder.setTitle(context.getString(R.string.rate)+" "+getApplicationName(context));
+                    dialogBuilder.setMessage(context.getString(R.string.email_feedback));
+                    dialogBuilder.setPositiveButton(context.getString(R.string.send_email), listenerEmail);
+                    dialogBuilder.setNegativeButton(context.getString(R.string.not_now), listenerEmail);
+                    dialogBuilder.show();
+                    break;
+            }
+            dialogInterface.dismiss();
+        }
+
+        private class DialogListenerSendEmail implements DialogInterface.OnClickListener{
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int buttonPressed) {
+                switch(buttonPressed){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                                "mailto", "YOUR_EMAIL", null));
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+                        context.startActivity(Intent.createChooser(emailIntent, context.getString(R.string.send_email)));
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        preferencesManager.resetFirstLaunchTimestamp();
+                        break;
+                }
+                dialogInterface.dismiss();
+            }
         }
     }
 }

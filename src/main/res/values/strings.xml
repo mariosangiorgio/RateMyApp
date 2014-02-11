@@ -4,4 +4,10 @@
     <string name="rate_button">Yes</string>
     <string name="later_button">Later</string>
     <string name="never_button">No, thanks</string>
+    <string name="rate_score">How would you rate this app?</string>
+    <string name="value_email">1~3 stars</string>
+    <string name="value_store">4 or 5 stars</string>
+    <string name="email_feedback">It seems that you didn\'t like this app that much. We would love to hear your feedback. Send us an email with your ideas of how we can improve the app.</string>
+    <string name="send_email">Send email</string>
+    <string name="not_now">Not now</string>
 </resources>

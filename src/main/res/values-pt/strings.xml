@@ -1,7 +1,0 @@
-<resources>
-  <string name="rate">Avaliar:</string>
-  <string name="rate_message">Você gostaria de avaliar este aplicativo na Play Store?</string>
-  <string name="rate_button">Sim</string>
-  <string name="later_button">Depois</string>
-  <string name="never_button">Não, obrigado</string>
-</resources>
