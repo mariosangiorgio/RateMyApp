@@ -1,6 +1,6 @@
 FORKED VERSION BY VINICIUS ALEXANDRE
 
-Mimics the behavior described at this article: http://www.theverge.com/2014/2/9/5395338/ea-dungeon-keeper-review-scam-google-play-store
+Mimics the behavior described in this article: http://www.theverge.com/2014/2/9/5395338/ea-dungeon-keeper-review-scam-google-play-store
 
 Basically, asks the user before he goes to Play Store if they will rate the app with 1~3 stars or 4~5.
 
