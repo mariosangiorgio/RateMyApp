@@ -3,5 +3,11 @@
     <string name="rate_message">Chcete ohodnotiť túto aplikáciu v Obchode Play?</string>
     <string name="rate_button">Áno</string>
     <string name="later_button">Neskôr</string>
-    <string name="never_button">Nie, vďaka</string>
+    <string name="never_button">Nie, ďakujem</string>
+    <string name="rate_score">Ako by ste ohodnotili túto aplikáciu?</string>
+    <string name="value_email">1,2 alebo 3 hviezdičky</string>
+    <string name="value_store">4 alebo 5 hviezdičiek</string>
+    <string name="email_feedback">Zdá sa, že sa vám táto aplikácia eľmi nepáči, a preto by sme radi počuli váš názor. Pošlite nám e-mail s vašimi myšlienkami, ako môžeme vylepšiť aplikáciu.</string>
+    <string name="send_email">Poslať e-mail</string>
+    <string name="not_now">Nie teraz</string>
 </resources>
