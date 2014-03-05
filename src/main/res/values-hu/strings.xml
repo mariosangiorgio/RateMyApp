@@ -1,0 +1,13 @@
+<resources>
+    <string name="rate">Értékeld ezt:</string>
+    <string name="rate_message">Szeretnéd értékelni ezt az alkalmazást a Play Áruházban?</string>
+    <string name="rate_button">Igen</string>
+    <string name="later_button">Később</string>
+    <string name="never_button">Nem, köszönöm</string>
+    <string name="rate_score">Hogyan értékelnéd ezt az alkalmazást?</string>
+    <string name="value_email">1-3 csillag</string>
+    <string name="value_store">4 vagy 5 csillag</string>
+    <string name="email_feedback">Úgy látszik nem igazán nyerte el a tetszésedet az alkalmazásunk. Oszd meg velünk a gondolataidat és küldj egy emailt az ötleteiddel, amikkel jobbá tehetjük.</string>
+    <string name="send_email">Küldés</string>
+    <string name="not_now">Most nem</string>
+</resources>
