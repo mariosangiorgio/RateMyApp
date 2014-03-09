@@ -34,6 +34,8 @@ RateMyApp currently supports the following languages:
  * Traditional Chinese (Taiwan) (thanks to Aerotinge)
  * Portuguese (thanks to RaphaDroid)
 
+If you want to customize and of the message strings you can do it easily with [Android default resource override](http://stackoverflow.com/questions/4263259/replace-or-override-string-in-android-library-project)
+
 Please note that if you want to compile the library by yourself you need to provide values for the `signing.password` and for `sonatypePassword` variables. You can either add them (with fake values, the real ones are needed only if you want to publish the library to maven central) to `gradle.properties` or pass them from the command line (by adding `-Psigning.password=SECRET -PsonatypePassword=SECRET` to the gradle invocation).
 
 * Mimics the behavior described in this article: http://www.theverge.com/2014/2/9/5395338/ea-dungeon-keeper-review-scam-google-play-store
