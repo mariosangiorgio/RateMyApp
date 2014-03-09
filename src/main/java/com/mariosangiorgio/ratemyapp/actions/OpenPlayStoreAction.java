@@ -13,7 +13,11 @@ public class OpenPlayStoreAction extends Action{
 
     @Override
     public void execute() {
-        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id" + context.getPackageName())));
+        try {
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + context.getPackageName())));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+        }
         preferencesManager.disableAlert();
     }
 }
