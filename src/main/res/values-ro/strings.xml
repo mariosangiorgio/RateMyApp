@@ -1,5 +1,5 @@
 <resources>
-    <string name="rate">Notă:</string>
+    <string name="rate">Evaluați:</string>
     <string name="rate_message">Ați dori să acordați o notă aplicației pe Play Store?</string>
     <string name="rate_button">Da</string>
     <string name="later_button">Mai târziu</string>
