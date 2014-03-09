@@ -1,0 +1,13 @@
+<resources>
+    <string name="rate">Notă:</string>
+    <string name="rate_message">Ați dori să acordați o notă aplicației pe Play Store?</string>
+    <string name="rate_button">Da</string>
+    <string name="later_button">Mai târziu</string>
+    <string name="never_button">Nu mulțumesc</string>
+    <string name="rate_score">Ce notă ați da acestei aplicații?</string>
+    <string name="value_email">1~3 stele</string>
+    <string name="value_store">4 sau 5 stele</string>
+    <string name="email_feedback">Se pare că nu v-a plăcut aplicația. Ne-ar plăcea să aflăm de ce. Puteți să ne trimiteți un mail cu ideile dumneavoastră despre cum ar trebui să îmbunătățim aplicația</string>
+    <string name="send_email">Trimite email</string>
+    <string name="not_now">Nu acum</string>
+</resources>
