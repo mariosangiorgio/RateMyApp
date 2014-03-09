@@ -11,7 +11,7 @@ public class RatingRequestListener implements DialogInterface.OnClickListener{
     private PreferencesManager preferencesManager;
 
     public RatingRequestListener(Action action, Context context){
-        if(this.action == null || this.preferencesManager == null){
+        if(action == null || context == null){
             throw new IllegalArgumentException();
         }
         this.action = action;
