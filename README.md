@@ -12,6 +12,8 @@ You can embed RateMyApp in your application either by downloading and including 
         dependencies {
             compile 'com.mariosangiorgio.RateMyApp:1.0'
         }
+
+If you want to use the latest version, which unforunately I still have to fully test, you can use version 1.1 instead of 1.0.
     
 Then add the following code at the end of your main activity `onCreate` method:
 
@@ -40,7 +42,7 @@ Please note that if you want to compile the library by yourself you need to prov
 
 * Mimics the behavior described in this article: http://www.theverge.com/2014/2/9/5395338/ea-dungeon-keeper-review-scam-google-play-store
 
-Basically, asks the user before he goes to Play Store if they will rate the app with 1~3 stars or 4~5.
+Basically, asks the user before he goes to Play Store if they will rate the app with 1-3 stars or 4-5.
 
-1~3: ask them to send an email with feedback and DON'T TAKE THEM TO PLAY STORE
-4~5: send them to Play Store normally
+1-3: ask them to send an email with feedback and DON'T TAKE THEM TO PLAY STORE
+4-5: send them to Play Store normally
