@@ -25,6 +25,7 @@ public class BuildTwoPhaseDialog extends Action{
         dialogBuilder.setPositiveButton(R.string.value_store, listenerStarNumber);
         dialogBuilder.setNegativeButton(R.string.value_email, listenerStarNumber);
         dialogBuilder.setMessage(R.string.rate_score);
+		dialogBuilder.show();
     }
 
     private class DialogListenerStarNumber implements DialogInterface.OnClickListener{
