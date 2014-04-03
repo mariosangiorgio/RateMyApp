@@ -13,7 +13,7 @@ You can embed RateMyApp in your application either by downloading and including 
             compile 'com.mariosangiorgio.RateMyApp:1.0'
         }
 
-If you want to use the latest version, which unforunately I still have to fully test, you can use version 1.1 instead of 1.0.
+If you want to use the latest version, which unforunately I still have to fully test, you can use version 1.2 instead of 1.0.
     
 Then add the following code at the end of your main activity `onCreate` method:
 
