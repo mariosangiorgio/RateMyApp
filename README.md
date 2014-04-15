@@ -13,7 +13,7 @@ You can embed RateMyApp in your application either by downloading and including 
             compile 'com.mariosangiorgio.RateMyApp:1.0'
         }
 
-If you want to use the latest version, which unforunately I still have to fully test, you can use version 1.2 instead of 1.0.
+If you want to use the latest version, which unfortunately I still have to fully test, you can use version 1.2.1 instead of 1.0.
     
 Then add the following code at the end of your main activity `onCreate` method:
 
@@ -24,7 +24,10 @@ Then add the following code at the end of your main activity `onCreate` method:
         //Optional if you want to show the alert in a custom way
         builder.setEmailAddress("mariosangiorgio@gmail.com");
         //Optional. It enables two phase request as introduced by vdlow*
+        // Use this if you are using version 1.0
         RateMyApp rateMyApp = builder.build(this);
+        // Use this if you are using version from 1.2.1
+        RateMyApp rateMyApp = builder.build(this, SharedPreferencesManager.buildFromContext(this));
         rateMyApp.appLaunched();
 
 RateMyApp currently supports the following languages:

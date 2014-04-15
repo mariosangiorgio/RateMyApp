@@ -3,19 +3,19 @@ package com.mariosangiorgio.ratemyapp.listeners;
 import android.content.Context;
 import android.content.DialogInterface;
 
-import com.mariosangiorgio.ratemyapp.PreferencesManager;
+import com.mariosangiorgio.ratemyapp.SharedPreferencesManager;
 import com.mariosangiorgio.ratemyapp.actions.Action;
 
 public class RatingRequestListener implements DialogInterface.OnClickListener{
     private Action action;
-    private PreferencesManager preferencesManager;
+    private SharedPreferencesManager preferencesManager;
 
     public RatingRequestListener(Action action, Context context){
         if(action == null || context == null){
             throw new IllegalArgumentException();
         }
         this.action = action;
-        this.preferencesManager = PreferencesManager.buildFromContext(context);
+        this.preferencesManager = SharedPreferencesManager.buildFromContext(context);
     }
 
     @Override

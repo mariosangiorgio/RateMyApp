@@ -2,9 +2,6 @@ package com.mariosangiorgio.ratemyapp;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 
 import com.mariosangiorgio.ratemyapp.actions.OpenPlayStoreAction;
 import com.mariosangiorgio.ratemyapp.listeners.RatingRequestListener;
@@ -17,7 +14,14 @@ public class RateMyApp implements  NotificationManager{
     private final NotificationManager notificationManager;
     private final RatingRequestListener listener;
 
-    RateMyApp(Context context, OptionalValue<Integer> daysUntilPrompt, OptionalValue<Integer> launchesUntilPrompt, NotificationManager notificationManager, RatingRequestListener listener){
+    RateMyApp(
+            Context context,
+            PreferencesManager preferencesManager,
+            OptionalValue<Integer> daysUntilPrompt,
+            OptionalValue<Integer> launchesUntilPrompt,
+            NotificationManager notificationManager,
+            RatingRequestListener listener
+    ){
         if(context == null){
             throw new IllegalArgumentException("context should not be null");
         }
@@ -37,12 +41,15 @@ public class RateMyApp implements  NotificationManager{
         }
         this.daysUntilPrompt = daysUntilPrompt;
         this.launchesUntilPrompt = launchesUntilPrompt;
-        this.preferencesManager = PreferencesManager.buildFromContext(context);
+        if(preferencesManager == null){
+            throw new IllegalArgumentException("preferences manager should not be null");
+        }
+        this.preferencesManager = preferencesManager;
         this.listener = listener;
     }
 
-    RateMyApp(Context context, OptionalValue<Integer> daysUntilPrompt, OptionalValue<Integer> launchesUntilPrompt, NotificationManager notificationManager){
-        this(context, daysUntilPrompt, launchesUntilPrompt, notificationManager, new RatingRequestListener(new OpenPlayStoreAction(context), context));
+    RateMyApp(Context context, PreferencesManager preferencesManager, OptionalValue<Integer> daysUntilPrompt, OptionalValue<Integer> launchesUntilPrompt, NotificationManager notificationManager){
+        this(context, preferencesManager, daysUntilPrompt, launchesUntilPrompt, notificationManager, new RatingRequestListener(new OpenPlayStoreAction(context), context));
     }
 
     public void appLaunched(){

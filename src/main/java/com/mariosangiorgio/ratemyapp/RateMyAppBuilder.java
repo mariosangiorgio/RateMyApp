@@ -38,9 +38,9 @@ public class RateMyAppBuilder {
         return this;
     }
 
-    private boolean isValid(String emailAdress){
-        return !TextUtils.isEmpty(emailAdress) &&
-                android.util.Patterns.EMAIL_ADDRESS.matcher(emailAdress).matches();
+    private boolean isValid(String emailAddress){
+        return !TextUtils.isEmpty(emailAddress) &&
+                android.util.Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches();
     }
 
     public RateMyAppBuilder setEmailAddress(String emailAddress){
@@ -50,19 +50,19 @@ public class RateMyAppBuilder {
         this.emailAddress = emailAddress;
         return this;
     }
-
-    public RateMyApp build(Context context){
+    
+    public RateMyApp build(Context context, PreferencesManager preferencesManager){
         OptionalValue<Integer> daysBeforeAlert = this.daysBeforeAlert == -1 ?
                 new OptionalValue<Integer>() : new OptionalValue<Integer>(this.daysBeforeAlert);
         OptionalValue<Integer> launchesBeforeAlert = this.launchesBeforeAlert == -1 ?
                 new OptionalValue<Integer>() : new OptionalValue<Integer>(this.launchesBeforeAlert);
         if(emailAddress == null){
-            return new RateMyApp(context, daysBeforeAlert, launchesBeforeAlert, notificationManager);
+            return new RateMyApp(context, preferencesManager, daysBeforeAlert, launchesBeforeAlert, notificationManager);
         }
         else{
             Action twoPhaseAction = new BuildTwoPhaseDialog(context, emailAddress);
             RatingRequestListener listener = new RatingRequestListener(twoPhaseAction, context);
-            return new RateMyApp(context, daysBeforeAlert, launchesBeforeAlert, notificationManager, listener);
+            return new RateMyApp(context, preferencesManager, daysBeforeAlert, launchesBeforeAlert, notificationManager, listener);
         }
     }
 }
