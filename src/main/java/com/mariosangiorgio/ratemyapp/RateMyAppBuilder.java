@@ -1,23 +1,32 @@
 package com.mariosangiorgio.ratemyapp;
 
-import android.content.Context;
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.text.TextUtils;
 
 import com.mariosangiorgio.ratemyapp.actions.Action;
-import com.mariosangiorgio.ratemyapp.actions.BuildTwoPhaseDialog;
-import com.mariosangiorgio.ratemyapp.listeners.RatingRequestListener;
+import com.mariosangiorgio.ratemyapp.actions.ShowDialogAction;
+import com.mariosangiorgio.ratemyapp.actions.OpenPlayStoreAction;
+import com.mariosangiorgio.ratemyapp.dialogs.AbstractDialogFragment;
+import com.mariosangiorgio.ratemyapp.dialogs.AbstractDialogFragmentFactory;
+import com.mariosangiorgio.ratemyapp.dialogs.NumberOfStarsDialog;
+import com.mariosangiorgio.ratemyapp.dialogs.SendEmailDialog;
+import com.mariosangiorgio.ratemyapp.dialogs.WantToRateDialog;
+import com.mariosangiorgio.ratemyapp.listeners.NumberOfStarsDialogListener;
+import com.mariosangiorgio.ratemyapp.listeners.SentEmailDialogListener;
+import com.mariosangiorgio.ratemyapp.listeners.WantToRateDialogListener;
 
 public class RateMyAppBuilder {
     private int launchesBeforeAlert = -1;
     private int daysBeforeAlert = -1;
-    private NotificationManager notificationManager = null;
+    private Action notificationAction = null;
     private String emailAddress = null;
 
-    public RateMyAppBuilder setNotificationManager(NotificationManager notificationManager){
-        if(notificationManager == null){
-            throw new IllegalArgumentException("Not-null NotificationManager expected");
+    public RateMyAppBuilder setNotificationAction(Action notificationAction){
+        if(notificationAction == null){
+            throw new IllegalArgumentException("Not-null notificationAction expected");
         }
-        this.notificationManager = notificationManager;
+        this.notificationAction = notificationAction;
         return this;
     }
 
@@ -51,18 +60,56 @@ public class RateMyAppBuilder {
         return this;
     }
     
-    public RateMyApp build(Context context, PreferencesManager preferencesManager){
+    public RateMyApp build(Activity context, PreferencesManager preferencesManager){
+        FragmentManager fragmentManager = context.getFragmentManager();
         OptionalValue<Integer> daysBeforeAlert = this.daysBeforeAlert == -1 ?
                 new OptionalValue<Integer>() : new OptionalValue<Integer>(this.daysBeforeAlert);
         OptionalValue<Integer> launchesBeforeAlert = this.launchesBeforeAlert == -1 ?
                 new OptionalValue<Integer>() : new OptionalValue<Integer>(this.launchesBeforeAlert);
-        if(emailAddress == null){
-            return new RateMyApp(context, preferencesManager, daysBeforeAlert, launchesBeforeAlert, notificationManager);
+
+        if(notificationAction == null){
+            Action playStoreAction = new OpenPlayStoreAction(context,preferencesManager);
+
+            Action innerAction;
+            if(emailAddress != null){
+                Action negativeAction = new ShowDialogAction(
+                        fragmentManager,
+                        new AbstractDialogFragmentFactory() {
+                            @Override
+                            public AbstractDialogFragment BuildInstance() {
+                                return new SendEmailDialog();
+                            }
+                        },
+                        new SentEmailDialogListener(context, preferencesManager, emailAddress),
+                        "SendEmailAction"
+                );
+                innerAction = new ShowDialogAction(
+                        fragmentManager,
+                        new AbstractDialogFragmentFactory() {
+                            @Override
+                            public AbstractDialogFragment BuildInstance() {
+                                return new NumberOfStarsDialog();
+                            }
+                        },
+                        new NumberOfStarsDialogListener(playStoreAction, negativeAction),
+                        "NumberOfStarsDialog"
+                );
+            }
+            else{
+                innerAction = playStoreAction;
+            }
+            notificationAction = new ShowDialogAction(
+                    fragmentManager,
+                    new AbstractDialogFragmentFactory() {
+                        @Override
+                        public AbstractDialogFragment BuildInstance() {
+                            return new WantToRateDialog();
+                        }
+                    },
+                    new WantToRateDialogListener(preferencesManager, innerAction),
+                    "WantToRateDialog"
+            );
         }
-        else{
-            Action twoPhaseAction = new BuildTwoPhaseDialog(context, emailAddress);
-            RatingRequestListener listener = new RatingRequestListener(twoPhaseAction, context);
-            return new RateMyApp(context, preferencesManager, daysBeforeAlert, launchesBeforeAlert, notificationManager, listener);
-        }
+        return new RateMyApp(preferencesManager, daysBeforeAlert, launchesBeforeAlert, notificationAction);
     }
 }

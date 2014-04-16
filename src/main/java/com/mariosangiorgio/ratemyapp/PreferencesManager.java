@@ -8,4 +8,8 @@ public interface PreferencesManager {
     int launchCounter();
 
     int daysFromFirstLaunch();
+
+    void disableAlert();
+
+    void resetFirstLaunchTimestamp();
 }
