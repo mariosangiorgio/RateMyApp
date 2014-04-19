@@ -28,6 +28,6 @@ public class OpenPlayStoreAction implements Action{
         } catch (android.content.ActivityNotFoundException e) {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
         }
-        preferencesManager.disableAlert();
+        preferencesManager.setAlertEnabled(false);
     }
 }

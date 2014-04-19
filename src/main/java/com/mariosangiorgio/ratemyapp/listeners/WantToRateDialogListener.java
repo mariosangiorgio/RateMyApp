@@ -30,7 +30,7 @@ public class WantToRateDialogListener implements DialogInterface.OnClickListener
                 preferencesManager.resetFirstLaunchTimestamp();
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
-                preferencesManager.disableAlert();
+                preferencesManager.setAlertEnabled(false);
                 break;
         }
         dialogInterface.dismiss();
