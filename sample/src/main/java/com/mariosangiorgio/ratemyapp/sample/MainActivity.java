@@ -87,7 +87,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        findViewById(R.id.button_rest).setOnClickListener(new OnClickListener() {
+        findViewById(R.id.button_reset).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 raterPrefs.setAlertEnabled(true);
