@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.mariosangiorgio.ratemyapp.ContextUtils;
 import com.mariosangiorgio.ratemyapp.R;
 
-public class WantToRateDialog extends AbstractDialogFragment{
+public class WantToRateDialog extends AbstractDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
