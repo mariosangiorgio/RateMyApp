@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     ///////////////
-    // Inits
+    // Init's
     ///////////////
 
     private void setupWidgets() {
@@ -86,7 +86,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "App Launches = " + raterPrefs.launchCounter());
-                rater.appLaunched();
+                rater.appLaunched(MainActivity.this);
                 setupTextViews();
             }
         });
@@ -108,7 +108,7 @@ public class MainActivity extends ActionBarActivity {
                 .setDaysBeforeAlert(getNumberOfDays())
                 .setEmailAddress("test@test.com");
 
-        rater = builder.build(this, raterPrefs);
+        rater = builder.build(this);
     }
 
     ///////////////

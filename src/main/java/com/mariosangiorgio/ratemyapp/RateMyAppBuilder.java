@@ -1,14 +1,11 @@
 package com.mariosangiorgio.ratemyapp;
 
-import android.app.Activity;
-import android.app.FragmentManager;
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.mariosangiorgio.ratemyapp.actions.Action;
-import com.mariosangiorgio.ratemyapp.actions.ShowDialogAction;
 import com.mariosangiorgio.ratemyapp.actions.OpenPlayStoreAction;
-import com.mariosangiorgio.ratemyapp.dialogs.AbstractDialogFragment;
-import com.mariosangiorgio.ratemyapp.dialogs.AbstractDialogFragmentFactory;
+import com.mariosangiorgio.ratemyapp.actions.ShowDialogAction;
 import com.mariosangiorgio.ratemyapp.dialogs.NumberOfStarsDialog;
 import com.mariosangiorgio.ratemyapp.dialogs.SendEmailDialog;
 import com.mariosangiorgio.ratemyapp.dialogs.WantToRateDialog;
@@ -59,39 +56,31 @@ public class RateMyAppBuilder {
         this.emailAddress = emailAddress;
         return this;
     }
+
+    public RateMyApp build(Context context) {
+        PreferencesManager preferencesManager = SharedPreferencesManager.buildFromContext(context);
+        return build(preferencesManager);
+    }
     
-    public RateMyApp build(Activity context, PreferencesManager preferencesManager){
-        FragmentManager fragmentManager = context.getFragmentManager();
+    public RateMyApp build(PreferencesManager preferencesManager){
         OptionalValue<Integer> daysBeforeAlert = this.daysBeforeAlert == -1 ?
                 new OptionalValue<Integer>() : new OptionalValue<Integer>(this.daysBeforeAlert);
         OptionalValue<Integer> launchesBeforeAlert = this.launchesBeforeAlert == -1 ?
                 new OptionalValue<Integer>() : new OptionalValue<Integer>(this.launchesBeforeAlert);
 
         if(notificationAction == null){
-            Action playStoreAction = new OpenPlayStoreAction(context,preferencesManager);
+            Action playStoreAction = new OpenPlayStoreAction(preferencesManager);
 
             Action innerAction;
             if(emailAddress != null){
                 Action negativeAction = new ShowDialogAction(
-                        fragmentManager,
-                        new AbstractDialogFragmentFactory() {
-                            @Override
-                            public AbstractDialogFragment BuildInstance() {
-                                return new SendEmailDialog();
-                            }
-                        },
-                        new SentEmailDialogListener(context, preferencesManager, emailAddress),
+                        new SentEmailDialogListener(preferencesManager, emailAddress),
+                        SendEmailDialog.class,
                         "SendEmailAction"
                 );
                 innerAction = new ShowDialogAction(
-                        fragmentManager,
-                        new AbstractDialogFragmentFactory() {
-                            @Override
-                            public AbstractDialogFragment BuildInstance() {
-                                return new NumberOfStarsDialog();
-                            }
-                        },
                         new NumberOfStarsDialogListener(playStoreAction, negativeAction),
+                        NumberOfStarsDialog.class,
                         "NumberOfStarsDialog"
                 );
             }
@@ -99,14 +88,8 @@ public class RateMyAppBuilder {
                 innerAction = playStoreAction;
             }
             notificationAction = new ShowDialogAction(
-                    fragmentManager,
-                    new AbstractDialogFragmentFactory() {
-                        @Override
-                        public AbstractDialogFragment BuildInstance() {
-                            return new WantToRateDialog();
-                        }
-                    },
                     new WantToRateDialogListener(preferencesManager, innerAction),
+                    WantToRateDialog.class,
                     "WantToRateDialog"
             );
         }
