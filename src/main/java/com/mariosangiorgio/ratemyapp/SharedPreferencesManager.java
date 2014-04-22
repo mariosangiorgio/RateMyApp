@@ -48,15 +48,22 @@ public class SharedPreferencesManager implements PreferencesManager{
         return (int) (System.currentTimeMillis() - firstLaunchTimestamp()) / MILLIS_IN_DAY;
     }
 
-    public void disableAlert() {
+    public void setAlertEnabled(boolean enable) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(ALERT_ENABLED, false);
+        editor.putBoolean(ALERT_ENABLED, enable);
         editor.commit();
     }
 
     public void resetFirstLaunchTimestamp() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong(FIRST_LAUNCH_TIMESTAMP, System.currentTimeMillis());
+        editor.commit();
+    }
+
+    @Override
+    public void resetLaunchCount() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(LAUNCH_COUNTER, 0);
         editor.commit();
     }
 }

@@ -1,5 +1,7 @@
 package com.mariosangiorgio.ratemyapp;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.util.Log;
 
 import com.mariosangiorgio.ratemyapp.actions.Action;
@@ -32,16 +34,13 @@ public class RateMyApp {
         this.action = action;
     }
 
-    public void appLaunched(){
+    public void appLaunched(Activity activity){
         Log.i("RateMyApp", "Application launch registered");
-        if(preferencesManager.alertEnabled()){
-            if(canShowDialog()){
-                action.execute();
-            }
-            else{
-                preferencesManager.incrementLaunchCounter();
-            }
+        FragmentManager fragmentManager = activity.getFragmentManager();
+        if(preferencesManager.alertEnabled() && canShowDialog() && fragmentManager != null){
+            action.execute(activity, fragmentManager);
         }
+        preferencesManager.incrementLaunchCounter();
     }
 
     private boolean launchCounterConditionsMet(){

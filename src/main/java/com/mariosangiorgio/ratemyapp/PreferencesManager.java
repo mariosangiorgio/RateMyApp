@@ -9,7 +9,9 @@ public interface PreferencesManager {
 
     int daysFromFirstLaunch();
 
-    void disableAlert();
+    void setAlertEnabled(boolean enable);
 
     void resetFirstLaunchTimestamp();
+
+    void resetLaunchCount();
 }
