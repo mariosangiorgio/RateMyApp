@@ -10,25 +10,44 @@ An Android module to kindly ask users to rate your application.
 You can embed RateMyApp in your application either by downloading and including the library or (better) by declearing it as a dependency.
 
         dependencies {
-            compile 'com.mariosangiorgio.RateMyApp:1.0'
+            compile 'com.mariosangiorgio.RateMyApp:1.2.2'
         }
 
-If you want to use the latest version, which unfortunately I still have to fully test, you can use version 1.2.1 instead of 1.0.
-    
-Then add the following code at the end of your main activity `onCreate` method:
+Version 1.2.2 contains the fix to a activity leakage on device orientation change.
+I tried to test it as much as I have been able but I'd appreciate bug reports if something does not work as expected.
+
+On your main activity you will need to override in the following wat the `onCreate` and `onSaveInstanceState` methods;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        /*
+         * Do here other things you need to do on creation
+         */
 
         RateMyAppBuilder builder = new RateMyAppBuilder();
-        builder.setLaunchesBeforeAlert(3); // Optional
-        builder.setDaysBeforeAlert(7);     // Optional
-        builder.setNotificationManager(notificationManager);
-        //Optional if you want to show the alert in a custom way
-        builder.setEmailAddress("mariosangiorgio@gmail.com");
-        //Optional. It enables two phase request as introduced by vdlow*
-        // Use this if you are using version 1.0
-        RateMyApp rateMyApp = builder.build(this);
-        // Use this if you are using version from 1.2.1
-        RateMyApp rateMyApp = builder.build(this, SharedPreferencesManager.buildFromContext(this));
-        rateMyApp.appLaunched();
+        builder.setLaunchesBeforeAlert(3);  // Optional
+        builder.setDaysBeforeAlert(7);      // Optional
+        builder.setEmailAddress("mariosangiorgio@gmail.com");   // Optional. It will enable two-phase rating request
+        PreferencesManager preferencesManager = SharedPreferencesManager.buildFromContext(this);
+
+        RateMyApp rateMyApp = builder.build(this, preferencesManager);
+        if(savedInstanceState == null || !savedInstanceState.getBoolean("rateMyAppLaunched", false)) {
+            rateMyApp.appLaunched();
+        }
+
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle bundle){
+        /*
+         * Store here whatever you need to put in the bundle
+         */
+
+        bundle.putBoolean("rateMyAppLaunched", true);
+
+        super.onSaveInstanceState(bundle);
+    }
 
 RateMyApp currently supports the following languages:
 

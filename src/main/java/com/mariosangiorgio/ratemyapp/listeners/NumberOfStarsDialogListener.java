@@ -1,10 +1,12 @@
 package com.mariosangiorgio.ratemyapp.listeners;
 
+import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 
 import com.mariosangiorgio.ratemyapp.actions.Action;
 
-public class NumberOfStarsDialogListener implements DialogInterface.OnClickListener{
+public class NumberOfStarsDialogListener implements DialogClickListener{
     private final Action positiveAction;
     private final Action negativeAction;
 
@@ -21,14 +23,13 @@ public class NumberOfStarsDialogListener implements DialogInterface.OnClickListe
     }
 
     @Override
-    public void onClick(DialogInterface dialogInterface, int buttonPressed) {
+    public void onClick(DialogInterface dialogInterface, int buttonPressed, Context context, FragmentManager fragmentManager) {
         switch (buttonPressed) {
             case DialogInterface.BUTTON_POSITIVE:
-                positiveAction.execute();
+                positiveAction.execute(context, fragmentManager);
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
-                negativeAction.execute();
-                break;
+                negativeAction.execute(context, fragmentManager);
         }
         dialogInterface.dismiss();
     }

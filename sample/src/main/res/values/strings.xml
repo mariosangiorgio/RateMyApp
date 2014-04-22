@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RateMyApp Sample</string>
+
+    <string name="alerts_enabled">Are alerts enable = %1$s</string>
+    <string name="days_count">Days since first launch %1$s, days before launch = </string>
+    <string name="launch_count">Launch count %1$s, counts before launch = </string>
+    <string name="launch_hint">#</string>
+
+    <string name="reset">Reset</string>
+    <string name="trigger_launch">Trigger Launch</string>
+
+</resources>
