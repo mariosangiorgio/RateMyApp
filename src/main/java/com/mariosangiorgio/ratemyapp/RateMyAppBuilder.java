@@ -11,6 +11,7 @@ public class RateMyAppBuilder {
     private int daysBeforeAlert = -1;
     private Action notificationAction = null;
     private String emailAddress = null;
+    private String emailMessage = null;
 
     public RateMyAppBuilder setNotificationAction(Action notificationAction){
         if(notificationAction == null){
@@ -50,6 +51,11 @@ public class RateMyAppBuilder {
         return this;
     }
 
+    public RateMyAppBuilder setEmailMessage(String emailMessage) {
+        this.emailMessage = emailMessage;
+        return this;
+    }
+
     public RateMyApp build(Context context) {
         PreferencesManager preferencesManager = SharedPreferencesManager.buildFromContext(context);
         return build(preferencesManager);
@@ -66,7 +72,7 @@ public class RateMyAppBuilder {
             if (TextUtils.isEmpty(emailAddress)) {
                 notificationAction = ShowDialogActionFactory.getWantToRateAction(preferencesManager);
             } else {
-                notificationAction = ShowDialogActionFactory.getWantToRateAction(preferencesManager, emailAddress);
+                notificationAction = ShowDialogActionFactory.getWantToRateAction(preferencesManager, emailAddress, emailMessage);
             }
         }
         return new RateMyApp(preferencesManager, daysBeforeAlert, launchesBeforeAlert, notificationAction);

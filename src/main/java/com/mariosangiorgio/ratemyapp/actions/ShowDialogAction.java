@@ -58,8 +58,12 @@ public class ShowDialogAction implements Action {
         }
 
         public static ShowDialogAction getWantToRateAction(PreferencesManager preferencesManager, String emailAddress) {
+            return getWantToRateAction(preferencesManager, emailAddress, null);
+        }
+
+        public static ShowDialogAction getWantToRateAction(PreferencesManager preferencesManager, String emailAddress, String emailMessage) {
             Action negativeEmailAction = new ShowDialogAction(
-                    new SentEmailDialogListener(preferencesManager, emailAddress),
+                    new SentEmailDialogListener(preferencesManager, emailAddress, emailMessage),
                     SendEmailDialog.class,
                     SendEmailDialog.class.getSimpleName()
             );

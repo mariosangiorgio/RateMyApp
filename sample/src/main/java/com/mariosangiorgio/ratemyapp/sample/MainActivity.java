@@ -1,5 +1,7 @@
 package com.mariosangiorgio.ratemyapp.sample;
 
+import android.os.Build;
+import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -106,7 +108,9 @@ public class MainActivity extends ActionBarActivity {
         RateMyAppBuilder builder = new RateMyAppBuilder();
         builder.setLaunchesBeforeAlert(getNumberOfLaunches())
                 .setDaysBeforeAlert(getNumberOfDays())
-                .setEmailAddress("test@test.com");
+                .setEmailAddress("test@test.com")
+                .setEmailMessage(getString(R.string.email_message,
+                        VERSION.RELEASE, VERSION.SDK_INT, Build.DEVICE, Build.MODEL, Build.PRODUCT));
 
         rater = builder.build(this);
     }
