@@ -4,14 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.mariosangiorgio.ratemyapp.actions.Action;
-import com.mariosangiorgio.ratemyapp.actions.OpenPlayStoreAction;
-import com.mariosangiorgio.ratemyapp.actions.ShowDialogAction;
-import com.mariosangiorgio.ratemyapp.dialogs.NumberOfStarsDialog;
-import com.mariosangiorgio.ratemyapp.dialogs.SendEmailDialog;
-import com.mariosangiorgio.ratemyapp.dialogs.WantToRateDialog;
-import com.mariosangiorgio.ratemyapp.listeners.NumberOfStarsDialogListener;
-import com.mariosangiorgio.ratemyapp.listeners.SentEmailDialogListener;
-import com.mariosangiorgio.ratemyapp.listeners.WantToRateDialogListener;
+import com.mariosangiorgio.ratemyapp.actions.ShowDialogAction.ShowDialogActionFactory;
 
 public class RateMyAppBuilder {
     private int launchesBeforeAlert = -1;
@@ -69,29 +62,12 @@ public class RateMyAppBuilder {
                 new OptionalValue<Integer>() : new OptionalValue<Integer>(this.launchesBeforeAlert);
 
         if(notificationAction == null){
-            Action playStoreAction = new OpenPlayStoreAction(preferencesManager);
 
-            Action innerAction;
-            if(emailAddress != null){
-                Action negativeAction = new ShowDialogAction(
-                        new SentEmailDialogListener(preferencesManager, emailAddress),
-                        SendEmailDialog.class,
-                        "SendEmailAction"
-                );
-                innerAction = new ShowDialogAction(
-                        new NumberOfStarsDialogListener(playStoreAction, negativeAction),
-                        NumberOfStarsDialog.class,
-                        "NumberOfStarsDialog"
-                );
+            if (TextUtils.isEmpty(emailAddress)) {
+                notificationAction = ShowDialogActionFactory.getWantToRateAction(preferencesManager);
+            } else {
+                notificationAction = ShowDialogActionFactory.getWantToRateAction(preferencesManager, emailAddress);
             }
-            else{
-                innerAction = playStoreAction;
-            }
-            notificationAction = new ShowDialogAction(
-                    new WantToRateDialogListener(preferencesManager, innerAction),
-                    WantToRateDialog.class,
-                    "WantToRateDialog"
-            );
         }
         return new RateMyApp(preferencesManager, daysBeforeAlert, launchesBeforeAlert, notificationAction);
     }
