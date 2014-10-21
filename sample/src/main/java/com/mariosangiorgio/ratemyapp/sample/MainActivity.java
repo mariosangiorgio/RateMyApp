@@ -37,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
         initRater();
         if (savedInstanceState == null) {
             // This null guard protects us from calling appLaunched on rotation.
-            rater.appLaunched();
+            rater.appLaunched(this);
         }
     }
 
