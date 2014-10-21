@@ -3,7 +3,7 @@
 }
 
 group = 'com.mariosangiorgio'
-version = '1.3'
+version = '1.4.0'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.1'
