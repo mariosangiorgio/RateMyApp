@@ -9,5 +9,6 @@
     <string name="value_store">4 or 5 stars</string>
     <string name="email_feedback">It seems that you didn\'t like this app that much. We would love to hear your feedback. Send us an email with your ideas of how we can improve the app.</string>
     <string name="send_email">Send email</string>
+    <string name="email_subject">Feedback</string>
     <string name="not_now">Not now</string>
 </resources>

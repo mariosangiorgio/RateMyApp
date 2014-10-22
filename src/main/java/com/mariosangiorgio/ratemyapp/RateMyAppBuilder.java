@@ -4,20 +4,14 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.mariosangiorgio.ratemyapp.actions.Action;
-import com.mariosangiorgio.ratemyapp.actions.OpenPlayStoreAction;
-import com.mariosangiorgio.ratemyapp.actions.ShowDialogAction;
-import com.mariosangiorgio.ratemyapp.dialogs.NumberOfStarsDialog;
-import com.mariosangiorgio.ratemyapp.dialogs.SendEmailDialog;
-import com.mariosangiorgio.ratemyapp.dialogs.WantToRateDialog;
-import com.mariosangiorgio.ratemyapp.listeners.NumberOfStarsDialogListener;
-import com.mariosangiorgio.ratemyapp.listeners.SentEmailDialogListener;
-import com.mariosangiorgio.ratemyapp.listeners.WantToRateDialogListener;
+import com.mariosangiorgio.ratemyapp.actions.ShowDialogAction.ShowDialogActionFactory;
 
 public class RateMyAppBuilder {
     private int launchesBeforeAlert = -1;
     private int daysBeforeAlert = -1;
     private Action notificationAction = null;
     private String emailAddress = null;
+    private String emailMessage = null;
 
     public RateMyAppBuilder setNotificationAction(Action notificationAction){
         if(notificationAction == null){
@@ -57,6 +51,11 @@ public class RateMyAppBuilder {
         return this;
     }
 
+    public RateMyAppBuilder setEmailMessage(String emailMessage) {
+        this.emailMessage = emailMessage;
+        return this;
+    }
+
     public RateMyApp build(Context context) {
         PreferencesManager preferencesManager = SharedPreferencesManager.buildFromContext(context);
         return build(preferencesManager);
@@ -69,29 +68,12 @@ public class RateMyAppBuilder {
                 new OptionalValue<Integer>() : new OptionalValue<Integer>(this.launchesBeforeAlert);
 
         if(notificationAction == null){
-            Action playStoreAction = new OpenPlayStoreAction(preferencesManager);
 
-            Action innerAction;
-            if(emailAddress != null){
-                Action negativeAction = new ShowDialogAction(
-                        new SentEmailDialogListener(preferencesManager, emailAddress),
-                        SendEmailDialog.class,
-                        "SendEmailAction"
-                );
-                innerAction = new ShowDialogAction(
-                        new NumberOfStarsDialogListener(playStoreAction, negativeAction),
-                        NumberOfStarsDialog.class,
-                        "NumberOfStarsDialog"
-                );
+            if (TextUtils.isEmpty(emailAddress)) {
+                notificationAction = ShowDialogActionFactory.getWantToRateAction(preferencesManager);
+            } else {
+                notificationAction = ShowDialogActionFactory.getWantToRateAction(preferencesManager, emailAddress, emailMessage);
             }
-            else{
-                innerAction = playStoreAction;
-            }
-            notificationAction = new ShowDialogAction(
-                    new WantToRateDialogListener(preferencesManager, innerAction),
-                    WantToRateDialog.class,
-                    "WantToRateDialog"
-            );
         }
         return new RateMyApp(preferencesManager, daysBeforeAlert, launchesBeforeAlert, notificationAction);
     }

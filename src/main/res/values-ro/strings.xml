@@ -9,5 +9,6 @@
     <string name="value_store">4 sau 5 stele</string>
     <string name="email_feedback">Se pare că nu v-a plăcut aplicația. Ne-ar plăcea să aflăm de ce. Puteți să ne trimiteți un mail cu ideile dumneavoastră despre cum ar trebui să îmbunătățim aplicația</string>
     <string name="send_email">Trimite email</string>
+    <string name="email_subject">Feedback</string>
     <string name="not_now">Nu acum</string>
 </resources>

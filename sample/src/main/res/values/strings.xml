@@ -10,5 +10,6 @@
 
     <string name="reset">Reset</string>
     <string name="trigger_launch">Trigger Launch</string>
+    <string name="email_message">\n\nThis Information is provided to help troubleshoot any issues you might be experiencing.\n\nDebug info:\nOS Version: %1$s\nOS API Level: %2$s\nDevice: %3$s\nModel (and Product): %4$s (%5$s)</string>
 
 </resources>

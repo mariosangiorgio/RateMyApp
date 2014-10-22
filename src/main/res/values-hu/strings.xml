@@ -9,5 +9,6 @@
     <string name="value_store">4 vagy 5 csillag</string>
     <string name="email_feedback">Úgy látszik nem igazán nyerte el a tetszésedet az alkalmazásunk. Oszd meg velünk a gondolataidat és küldj egy emailt az ötleteiddel, amikkel jobbá tehetjük.</string>
     <string name="send_email">Küldés</string>
+    <string name="email_subject">Visszacsatolás</string>
     <string name="not_now">Most nem</string>
 </resources>
