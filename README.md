@@ -18,7 +18,7 @@ Basically, asks the user before he goes to Play Store if they will rate the app 
 You can embed RateMyApp in your application either by downloading and including the library or (better) by declearing it as a dependency.
 
         dependencies {
-            compile 'com.mariosangiorgio.RateMyApp:1.4.0'
+            compile 'com.mariosangiorgio:RateMyApp:1.4.0'
         }
 
 ## ChangeLog
