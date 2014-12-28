@@ -1,0 +1,14 @@
+<resources>
+<string name="rate">قيم:</string>
+<string name="rate_message">هل تريد تقييم هذا التطبيق على المتجر ؟</string>
+<string name="rate_button">نعم</string>
+<string name="later_button">لاحقا</string>
+<string name="never_button">لا,شكرا</string>
+<string name="rate_score">بكم تقيم هذا التطبيق ؟</string>
+<string name="value_email">1&#8211;3 نجمات</string>
+<string name="value_store">4 أو 5 نجمات</string>
+<string name="email_feedback">على مايبدو ان التطبيق لم يعجبك. نريد الاستماع الى انتقادك. ارسل لنا بالايميل عن افكارك وعن طريقة تحسين التطبيق</string>
+<string name="send_email">أرسل ايميل</string>
+<string name="email_subject">إنتقاد</string>
+<string name="not_now">ليس الآن</string>
+</resources>
